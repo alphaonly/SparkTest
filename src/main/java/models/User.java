@@ -3,6 +3,7 @@ package models;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NavigableMap;
 
 @Entity
 @Table(name = "users")
@@ -21,19 +22,22 @@ public class User extends GameObject {
     @Column(name="surname")
     private String surname;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Game> gameList;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Game> games;
 
     public  User(){}
     public  User(String login, String name){
         this.name = name;
         this.login = login;
-        this.gameList = new ArrayList<>();
+        this.games = new ArrayList<>();
 
     }
     public void addGame(Game game){
-        gameList.add(game);
+        games.add(game);
 
+    }
+    public int getId(){
+        return id;
     }
 
 }
