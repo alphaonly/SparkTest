@@ -6,6 +6,7 @@ import models.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.persistence.Query;
 import java.util.List;
 
 public class UserDao implements Dao{
@@ -43,6 +44,20 @@ public class UserDao implements Dao{
         session.close();
     }
 
+    public void deleteAll() {
+       Session session =  HibernateSessionFactoryUtil.getSessionFactory()
+                .openSession();
+               // .beginTransaction();
+        Transaction tx =  session.beginTransaction();
+       Query q =  session.createQuery("delete from User");
+        q.executeUpdate();
+       tx.commit();
+
+        session.close();
+//       .createQuery("delete from User")
+//                .executeUpdate();
+
+    }
     @Override
     public List<User> findAll() {
 

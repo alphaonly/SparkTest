@@ -48,4 +48,7 @@ public class GameDao implements Dao {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User").list();
 
     }
+    public void deleteAll() {
+        HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("delete from games").list();
+    }
 }

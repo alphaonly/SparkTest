@@ -40,4 +40,13 @@ public class User extends GameObject {
         return id;
     }
 
+    @Override
+    public String toString() {
+        String output = new String("Имя пользователя:" + this.name + "\n"
+                +"login:" +this.login +"\n"
+                +"Игры:" + this.games +"\n"
+                );
+
+        return output;
+    }
 }

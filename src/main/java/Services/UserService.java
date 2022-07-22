@@ -25,5 +25,6 @@ public class UserService {
     public List<User> findAll(){
         return userDao.findAll();
     }
+    public void deleteAll() { userDao.deleteAll();}
 
 }

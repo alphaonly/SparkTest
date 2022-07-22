@@ -8,6 +8,9 @@ import java.util.List;
 @Entity
 @Table(name = "games")
 public class Game extends GameObject {
+
+
+
     @Id
     @Column(name = "game_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +25,8 @@ public class Game extends GameObject {
     @ManyToMany(mappedBy = "games", fetch = FetchType.LAZY)
     List<User> players;
 
-
+    protected Game(){}
+    
     public Game(User host,String description){
         this.host = host.getId();
         this.name = description;

@@ -5,6 +5,7 @@ import models.User;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -27,7 +28,7 @@ public class SparktestClass {
 
 
         User user1 = new User("alpha_only","Pavel");
-        User user2 = new User("alpha_only","Pavel");
+        User user2 = new User("equinox293","Vasiliy");
         Game game = new Game(user1, "Poker party1");
 
         user1.addGame(game);
@@ -36,13 +37,17 @@ public class SparktestClass {
         UserService userService = new UserService();
         GameService gameService = new GameService();
 
-        userService.saveUser(user1);
-        userService.saveUser(user2);
-        gameService.saveGame(game);
+//        userService.saveUser(user1);
+//        userService.saveUser(user2);
+//        gameService.saveGame(game);
 
+            List<User> userlist;
+            userlist = userService.findAll();
 
-
-
+            System.out.println(userlist);
+            userService.deleteAll();
+            userlist = userService.findAll();
+            System.out.println(userlist);
 
 
 
