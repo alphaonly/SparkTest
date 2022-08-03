@@ -1,5 +1,7 @@
 package models;
 
+import Common.Sockets.Game;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "games")
-public class Game extends GameObject {
+public class GameModel extends Game {
 
 
 
@@ -22,19 +24,21 @@ public class Game extends GameObject {
     @Column(name = "name_text")
     String name;
    // @JoinColumn(name = "game_id")
-    @ManyToMany(mappedBy = "games", fetch = FetchType.LAZY)
-    List<User> players;
+    @ManyToMany(mappedBy = "gameModels", fetch = FetchType.LAZY)
+    List<UserModel> players;
 
-    protected Game(){}
+    protected GameModel(){}
     
-    public Game(User host,String description){
+    public GameModel(UserModel host, String description){
         this.host = host.getId();
         this.name = description;
         this.players= new ArrayList<>();
     }
-    public void addPlayer(User user) throws  AddUserException{
+
+
+    public void addPlayer(UserModel userModel) throws  AddUserException{
         try {
-            players.add(user);
+            players.add(userModel);
         }catch (Exception e){ throw new AddUserException(); }
     }
 

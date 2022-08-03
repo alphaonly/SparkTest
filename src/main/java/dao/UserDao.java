@@ -1,8 +1,8 @@
 package dao;
 
 import Utils.HibernateSessionFactoryUtil;
-import models.GameObject;
-import models.User;
+import Common.Sockets.GameObject;
+import models.UserModel;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -14,10 +14,23 @@ public class UserDao implements Dao{
 
 
     @Override
-    public User findById(int id) {
+    public UserModel findById(int id) {
 
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(User.class, id);
+        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(UserModel.class, id);
 
+    }
+    public List<UserModel> findByLogin(String login) {
+
+      //  return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(UserModel.class, login);
+//        String hql = " from UserModel U where U.login=:login_id";
+        String hql = " from UserModel U where U.login = :login_id";
+        Query query =  HibernateSessionFactoryUtil
+                .getSessionFactory()
+                .openSession()
+                .createQuery(hql);
+        query.setParameter("login_id", login);
+
+        return query.getResultList();
     }
     @Override
     public void save(GameObject user) {
@@ -45,23 +58,20 @@ public class UserDao implements Dao{
     }
 
     public void deleteAll() {
-       Session session =  HibernateSessionFactoryUtil.getSessionFactory()
-                .openSession();
-               // .beginTransaction();
+       Session session =  HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction tx =  session.beginTransaction();
-       Query q =  session.createQuery("delete from User");
+       Query q =  session.createQuery("delete from UserModel");
         q.executeUpdate();
        tx.commit();
 
         session.close();
-//       .createQuery("delete from User")
-//                .executeUpdate();
+
 
     }
     @Override
-    public List<User> findAll() {
+    public List<UserModel> findAll() {
 
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User").list();
+        return HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("from UserModel").list();
 
     }
 

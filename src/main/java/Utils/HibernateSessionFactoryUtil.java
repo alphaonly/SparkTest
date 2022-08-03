@@ -1,7 +1,7 @@
 package Utils;
 
-import models.Game;
-import models.User;
+import models.GameModel;
+import models.UserModel;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -16,8 +16,8 @@ public class HibernateSessionFactoryUtil {
         if (sessionFactory == null){
             try {
                 Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-                configuration.addAnnotatedClass(User.class);
-                configuration.addAnnotatedClass(Game.class);
+                configuration.addAnnotatedClass(UserModel.class);
+                configuration.addAnnotatedClass(GameModel.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());

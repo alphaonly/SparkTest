@@ -1,8 +1,6 @@
 package dao;
 
-import models.GameObject;
-
-import models.User;
+import Common.Sockets.GameObject;
 
 import java.util.List;
 

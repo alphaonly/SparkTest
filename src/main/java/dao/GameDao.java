@@ -1,8 +1,7 @@
 package dao;
 import Utils.HibernateSessionFactoryUtil;
-import models.Game;
-import models.GameObject;
-import models.User;
+import models.GameModel;
+import Common.Sockets.GameObject;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -11,8 +10,8 @@ import java.util.List;
 public class GameDao implements Dao {
 
     @Override
-    public Game findById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Game.class, id);
+    public GameModel findById(int id) {
+        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(GameModel.class, id);
     }
 
     @Override
@@ -43,7 +42,7 @@ public class GameDao implements Dao {
     }
 
     @Override
-    public List<Game> findAll() {
+    public List<GameModel> findAll() {
 
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User").list();
 

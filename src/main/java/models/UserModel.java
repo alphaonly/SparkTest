@@ -1,13 +1,15 @@
 package models;
 
+import Common.Sockets.GameObject;
+import Common.Sockets.User;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NavigableMap;
 
 @Entity
 @Table(name = "users")
-public class User extends GameObject {
+public class UserModel extends User {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,21 +21,40 @@ public class User extends GameObject {
     @Column(name="name")
     private String name;
 
+    @Override
+    public String getLogin() {
+        return login;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getSurname() {
+        return surname;
+    }
+
+    public List<GameModel> getGameModels() {
+        return gameModels;
+    }
+
     @Column(name="surname")
     private String surname;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Game> games;
+    private List<GameModel> gameModels;
 
-    public  User(){}
-    public  User(String login, String name){
+    public UserModel(){}
+    public UserModel(String login, String name){
         this.name = name;
         this.login = login;
-        this.games = new ArrayList<>();
+        this.gameModels = new ArrayList<>();
 
     }
-    public void addGame(Game game){
-        games.add(game);
+    public void addGame(GameModel gameModel){
+        gameModels.add(gameModel);
 
     }
     public int getId(){
@@ -44,9 +65,13 @@ public class User extends GameObject {
     public String toString() {
         String output = new String("Имя пользователя:" + this.name + "\n"
                 +"login:" +this.login +"\n"
-                +"Игры:" + this.games +"\n"
+                +"Игры:" + this.gameModels +"\n"
                 );
 
         return output;
     }
+//    public User toUser(){
+//
+//        return new User()
+//    }
 }
