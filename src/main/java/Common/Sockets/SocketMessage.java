@@ -1,22 +1,16 @@
 package Common.Sockets;
 
 import java.io.Serializable;
+import Common.Sockets.messageType;
 
-enum messageType{
-    getUser,
-    getGame,
-    sendUser,
-    sendGame,
-    checkUserExists
-}
 
 
 public class SocketMessage implements Serializable {
 
     private User user;
-   private Game game;
-   private messageType messageType;
-   private String error;
+    private Game game;
+    private messageType messageType;
+    private String error;
 
     public void setGame(Game game) {
         this.game = game;

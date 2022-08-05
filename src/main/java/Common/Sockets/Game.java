@@ -14,12 +14,18 @@ public class Game extends GameObject {
     protected Game(){}
 
     public Game(User host, String description){
-            this.host = host;
-            this.name = description;
-            this.players= new ArrayList<>();
-        }
+        this.host = host;
+        this.name = description;
+        this.players= new ArrayList<>();
+    }
 
-        public void addPlayer(User user) throws AddUserException {
+
+    public Game(int id, User host, String name) {
+        this.id = id;
+        this.host = host;
+        this.name = name;
+    }
+    public void addPlayer(User user) throws AddUserException {
 
                 players.add(user);
 

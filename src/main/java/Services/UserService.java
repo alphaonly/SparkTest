@@ -1,6 +1,8 @@
 package Services;
 
 import Common.Sockets.Exceptions.DatabaseInconsistencyException;
+import Common.Sockets.Game;
+import Common.Sockets.User;
 import dao.UserDao;
 import models.UserModel;
 
@@ -35,7 +37,6 @@ public class UserService {
         return userDao.findAll();
     }
     public void deleteAll() { userDao.deleteAll();}
-
 
     public static void main(String[] args) {
 

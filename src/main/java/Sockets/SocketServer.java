@@ -1,5 +1,9 @@
-package Common.Sockets;
+package Sockets;
 
+import Common.Sockets.CommonData;
+import Common.Sockets.Game;
+import Common.Sockets.SocketMessage;
+import Common.Sockets.User;
 import Services.UserService;
 import models.GameModel;
 import models.UserModel;
@@ -22,9 +26,9 @@ public class SocketServer implements  Runnable {
 
             int count = 0;
             ServerSocket serverSocket = new ServerSocket(CommonData.getServerPort());
-//            while (true == true) {
-            while (count<=3) {
-                count++;
+
+            while (count == 0) {
+//                count++;
                 clientSocket = serverSocket.accept();
 
                 outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -49,14 +53,13 @@ public class SocketServer implements  Runnable {
                     case sendUser ->{}
                     case checkUserExists -> {
                         if(clientRequest.userIsExist()) {
-                            User user = (User)userService.findUser(clientRequest.getUser().getLogin());
-                            Common.Sockets.User u;
-                            u = user;
-                            if (u.isExist()) {
+                            User user = userService.findUser(clientRequest.getUser().getLogin()).toUser();
+                            if (user.isExist()) {
                                 serverResponse.setUser(user);
 
 
-                            }
+                            }else serverResponse.setError("NOUSER");
+
                         }
 
 
@@ -70,10 +73,10 @@ public class SocketServer implements  Runnable {
                 outputStream.close();
                 inputStream.close();
                 clientSocket.close();
-                serverSocket.close();
 
 
             }
+            serverSocket.close();
 
 
         }catch (Exception e){

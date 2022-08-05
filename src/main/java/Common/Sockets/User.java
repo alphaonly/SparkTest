@@ -1,7 +1,5 @@
 package Common.Sockets;
 
-import models.UserModel;
-
 import java.util.List;
 
 public class User extends GameObject  {
@@ -21,6 +19,10 @@ public class User extends GameObject  {
         this.surname = surname;
         this.games = games;
     }
+    public User(int id) {
+        this.id = id;
+    }
+
     public User(int id, String login, String name, String surname) {
         this.id = id;
         this.login = login;
@@ -65,24 +67,16 @@ public class User extends GameObject  {
     }
 
     public boolean isExist(){
-
-        int id;
-        String login;
-
-        if(UserModel.class.isInstance(this)){
-            UserModel userModel = (UserModel)this;
-            id = userModel.getId();
-            login = userModel.getLogin();
-        } else{
-           // id = ((UserModel) this).getId();
-            id = this.id;
-            login = this.login;
-        }
-
-
-        if ( id >= 0 && login != null)
-            return true;
-        else
-            return  false;
+//        if(this instanceof UserModel)
+//            return  ( ((UserModel)this).getId() >= 0 && ((UserModel)this).getLogin() != null);
+//        else return  ( this.id >= 0 && this.login != null);
+        return  ( this.id >= 0 && this.login != null);
     }
+
+
+    public boolean equals(User user) {
+        return (this.id == user.getId());
+    }
+
+
 }

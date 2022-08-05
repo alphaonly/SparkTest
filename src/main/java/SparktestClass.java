@@ -1,5 +1,5 @@
 import Common.Sockets.SocketClient;
-import Common.Sockets.SocketServer;
+import Sockets.SocketServer;
 
 import static spark.Spark.*;
 
@@ -48,13 +48,13 @@ public class SparktestClass {
         SocketServer socketServer = new SocketServer();
 
 
-       SocketClient socketClient = new SocketClient();
+//      SocketClient socketClient = new SocketClient();
 
         Thread serverThread = new Thread(socketServer);
-        Thread clientThread = new Thread(socketClient);
+//       Thread clientThread = new Thread(socketClient);
 
         serverThread.start();
-        clientThread.start();
+//       clientThread.start();
 
 
 

@@ -1,5 +1,6 @@
 package models;
 
+import Common.Sockets.Game;
 import Common.Sockets.GameObject;
 import Common.Sockets.User;
 
@@ -43,7 +44,7 @@ public class UserModel extends User {
     @Column(name="surname")
     private String surname;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<GameModel> gameModels;
 
     public UserModel(){}
@@ -70,8 +71,9 @@ public class UserModel extends User {
 
         return output;
     }
-//    public User toUser(){
-//
-//        return new User()
-//    }
+    public User toUser(){
+        List<Game> gameList = gameModels.stream().map(GameModel::toGame).toList();
+        return new  User(this.id, this.login, this.name, this.surname, gameList);
+        }
+
 }
